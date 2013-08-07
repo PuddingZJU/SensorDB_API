@@ -73,7 +73,7 @@ int test_main(int argc,char* argv[]){
 	clog<<"DataBase Connected"<<endl;
 	db.ExecuteSQL("Truncate Table SensorDataTable");
 	clog<<"Writing Data"<<endl;
-	db.AddData(LoadData("all.txt"));
+	BOOST_REQUIRE(db.AddData(LoadData("all.txt")));
 	clog<<"Tests Start"<<endl;
 	clog<<"Test(1) SelectDataByActivityId(8) Running...";
 	BOOST_CHECK(compare(db.SelectDataByActivityId(8),LoadData("activity.txt")));

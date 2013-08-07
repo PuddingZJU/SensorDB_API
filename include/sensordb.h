@@ -20,7 +20,7 @@ public:
 	bool isOpen();
 	//int get
     void CloseDB();
-	void ExecuteSQL(string sqlcommand);
+	bool ExecuteSQL(string sqlcommand);
     SensorDataSet ExecuteSQL_SelectFromSensorDataTable(string sqlcommand);
     SensorData SelectDataByID(int id);
     SensorDataSet SelectDataByIDSection(int id_start,int id_end);
@@ -36,7 +36,7 @@ public:
     SensorDataSet SelectDataByActivityTypeName(string Name);
     SensorDataSet SelectDataByPositionId(int id);
     SensorDataSet SelectDataByPositionName(string Name);
-    void AddData(SensorDataSet dataset);
+    bool AddData(SensorDataSet dataset);
 };
 
 #endif // SENSORDB_H

@@ -27,11 +27,12 @@ void SensorDB::CloseDB()
     QSqlDatabase::removeDatabase(dbname);
 }
 
-void SensorDB::ExecuteSQL(string sqlcommand){
+bool SensorDB::ExecuteSQL(string sqlcommand){
 	if(db.isOpen()){
         QSqlQuery query;
         QString sqlcmd = string2qstring(sqlcommand);
         if(query.exec(sqlcmd)){
+			return true;
 			//qDebug()<<"Success";
 		}
 		else{
@@ -41,6 +42,7 @@ void SensorDB::ExecuteSQL(string sqlcommand){
 	else{
 		qDebug()<<"DataBase is not opened";
 	}
+	return false;
 }
 bool SensorDB::isOpen(){
 	return db.isOpen();
@@ -185,7 +187,7 @@ SensorDataSet  SensorDB::SelectDataByPositionName(string Name)
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd);
 }
 
-void SensorDB::AddData(SensorDataSet dataset)
+bool SensorDB::AddData(SensorDataSet dataset)
 {
 
     string channel_num="";
@@ -222,7 +224,9 @@ void SensorDB::AddData(SensorDataSet dataset)
 			cmd+=(",'"+dataset.GetSensorData(i).GetChannel(j-1).ToString()+"'");
 		}
 		cmd+=");";
-		ExecuteSQL(cmd);
+		if(!ExecuteSQL(cmd)){
+			return false;
+		}
 	}
-
+	return true;
 }
