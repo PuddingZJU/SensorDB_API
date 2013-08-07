@@ -102,86 +102,86 @@ SensorDataSet SensorDB::ExecuteSQL_SelectFromSensorDataTable(std::string sqlcomm
 
 SensorData SensorDB::SelectDataByID(int id)
 {
-    string sqlcmd = "select * from [CAPGSensorDataDB].[dbo].[SensorDataTable] where ID = "+int2string(id);
+    string sqlcmd = "select * from [dbo].[SensorDataTable] where ID = "+int2string(id);
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd).GetSensorData(0);
 }
 
 SensorDataSet  SensorDB::SelectDataByIDSection(int id_start,int id_end)
 {
 
-    string sqlcmd = "select * from [CAPGSensorDataDB].[dbo].[SensorDataTable] where ID between "+int2string(id_start)+" and "+int2string(id_end);
+    string sqlcmd = "select * from [dbo].[SensorDataTable] where ID between "+int2string(id_start)+" and "+int2string(id_end);
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd);
 }
 
 SensorDataSet  SensorDB::SelectDataByDataTypeId(int id)
 {
-    string sqlcmd = "select * from [CAPGSensorDataDB].[dbo].[SensorDataTable] where DataTypeID = "+int2string(id);
+    string sqlcmd = "select * from [dbo].[SensorDataTable] where DataTypeID = "+int2string(id);
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd);
 }
 
 SensorDataSet  SensorDB::SelectDataByDataTypeName(string Name)
 {
-    string sqlcmd = "select * from [CAPGSensorDataDB].[dbo].[SensorDataTable] where DataTypeID IN (select ID from [CAPGSensorDataDB].[dbo].[DataTypeTable] where Name = '"+Name+"')";
+    string sqlcmd = "select * from [dbo].[SensorDataTable] where DataTypeID IN (select ID from [dbo].[DataTypeTable] where Name = '"+Name+"')";
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd);
 }
 
 SensorDataSet  SensorDB::SelectDataByOperatorId(int id)
 {
-    string sqlcmd = "select * from [CAPGSensorDataDB].[dbo].[SensorDataTable] where OperatorID = "+int2string(id);
+    string sqlcmd = "select * from [dbo].[SensorDataTable] where OperatorID = "+int2string(id);
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd);
 }
 
 SensorDataSet  SensorDB::SelectDataByOperatorName(string Name)
 {
-    string sqlcmd = "select * from [CAPGSensorDataDB].[dbo].[SensorDataTable] where OperatorID IN (select ID from [CAPGSensorDataDB].[dbo].[OperatorTable] where Name = '"+Name+"')";
+    string sqlcmd = "select * from [dbo].[SensorDataTable] where OperatorID IN (select ID from [dbo].[OperatorTable] where Name = '"+Name+"')";
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd);
 }
 
 SensorDataSet  SensorDB::SelectDataByDeviceId(int id)
 {
-    string sqlcmd = "select * from [CAPGSensorDataDB].[dbo].[SensorDataTable] where DeviceID = "+int2string(id);
+    string sqlcmd = "select * from [dbo].[SensorDataTable] where DeviceID = "+int2string(id);
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd);
 }
 
 SensorDataSet  SensorDB::SelectDataByDeviceName(string Name)
 {
-    string sqlcmd = "select * from [CAPGSensorDataDB].[dbo].[SensorDataTable] where DeviceID IN  (select ID from [CAPGSensorDataDB].[dbo].[DeviceTable] where Name = '"+Name+"')";
+    string sqlcmd = "select * from [dbo].[SensorDataTable] where DeviceID IN  (select ID from [dbo].[DeviceTable] where Name = '"+Name+"')";
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd);
 }
 
 SensorDataSet  SensorDB::SelectDataByActivityId(int id)
 {
-    string sqlcmd = "select * from [CAPGSensorDataDB].[dbo].[SensorDataTable] where ActivityID = "+int2string(id);
+    string sqlcmd = "select * from [dbo].[SensorDataTable] where ActivityID = "+int2string(id);
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd);
 }
 
 SensorDataSet  SensorDB::SelectDataByActivityName(string Name)
 {
-   string sqlcmd = "select * from [CAPGSensorDataDB].[dbo].[SensorDataTable] where ActivityID IN (select ID from [CAPGSensorDataDB].[dbo].[ActivityTable] where Name = '"+Name+"' )";
+   string sqlcmd = "select * from [dbo].[SensorDataTable] where ActivityID IN (select ID from [dbo].[ActivityTable] where Name = '"+Name+"' )";
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd);
 }
 
 SensorDataSet  SensorDB::SelectDataByActivityTypeId(int id)
 {
-    string sqlcmd = "select * from [CAPGSensorDataDB].[dbo].[SensorDataTable] where ActivityID IN (select ID from [CAPGSensorDataDB].[dbo].[ActivityTable] where ActivityType = "+int2string(id)+" )";
+    string sqlcmd = "select * from [dbo].[SensorDataTable] where ActivityID IN (select ID from [dbo].[ActivityTable] where ActivityType = "+int2string(id)+" )";
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd);
 }
 
 SensorDataSet  SensorDB::SelectDataByActivityTypeName(string Name)
 {
-    string sqlcmd = "select * from [CAPGSensorDataDB].[dbo].[SensorDataTable] where ActivityID IN (select ID from [CAPGSensorDataDB].[dbo].[ActivityTable] where ActivityType IN (Select ID From [CAPGSensorDataDB].[dbo].[ActivityTypeTable] Where Name = '"+Name+"' ) )";
+    string sqlcmd = "select * from [dbo].[SensorDataTable] where ActivityID IN (select ID from [dbo].[ActivityTable] where ActivityType IN (Select ID From [dbo].[ActivityTypeTable] Where Name = '"+Name+"' ) )";
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd);
 }
 
 SensorDataSet  SensorDB::SelectDataByPositionId(int id)
 {
-    string sqlcmd = "select * from [CAPGSensorDataDB].[dbo].[SensorDataTable] where PositionID = "+int2string(id);
+    string sqlcmd = "select * from [dbo].[SensorDataTable] where PositionID = "+int2string(id);
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd);
 }
 
 SensorDataSet  SensorDB::SelectDataByPositionName(string Name)
 {
-    string sqlcmd = "select * from [CAPGSensorDataDB].[dbo].[SensorDataTable] where PositionID IN (select ID from [CAPGSensorDataDB].[dbo].[PositionTable] where Name = '"+Name+"')";
+    string sqlcmd = "select * from [dbo].[SensorDataTable] where PositionID IN (select ID from [dbo].[PositionTable] where Name = '"+Name+"')";
     return ExecuteSQL_SelectFromSensorDataTable(sqlcmd);
 }
 
@@ -200,7 +200,7 @@ void SensorDB::AddData(SensorDataSet dataset)
     string createtime="";
 	for (int i = 0; i < dataset.Count(); i++)
 	{
-		string cmd = "INSERT INTO [CAPGSensorDataDB].[dbo].[SensorDataTable](DataTypeID,ActivityID,DeviceID,OperatorID,PositionID,SampleRate,CreateTime,TotalChannelNum,ActivityBeginFrameID,ActivityEndFrameID";
+		string cmd = "INSERT INTO [dbo].[SensorDataTable](DataTypeID,ActivityID,DeviceID,OperatorID,PositionID,SampleRate,CreateTime,TotalChannelNum,ActivityBeginFrameID,ActivityEndFrameID";
 		for (int j = 1; j <= dataset.GetSensorData(i).GetTotalChannelNum(); j++)
 		{
 			cmd += (",channel_"+int2string(j));
