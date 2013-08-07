@@ -9,6 +9,7 @@ include_directories(${Qt5Core_INCLUDES})
 include_directories(${Qt5Sql_INCLUDES})
 ADD_EXECUTABLE(${TARGET} ${DIR_SENSORDB_API_Test})
 TARGET_LINK_LIBRARIES(${TARGET} ${SENSORDB_API_LIB})
+qt5_use_modules(${TARGET}  Widgets Sql Core)
 ADD_TEST(
 	NAME ${TARGET}
 	COMMAND $<TARGET_FILE:${TARGET}>
