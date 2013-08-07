@@ -1,0 +1,7 @@
+INCLUDE_DIRECTORIES (include)
+SET(SENSORDB_API_LIB SensorDB_API)
+SET(TARGET SensorDB_Test)
+ADD_SUBDIRECTORY(src)
+enable_testing()
+ADD_SUBDIRECTORY(test)
+
