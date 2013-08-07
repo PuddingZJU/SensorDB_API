@@ -1,5 +1,7 @@
 #ifndef SENSORDATA_H
 #define SENSORDATA_H
+#undef min
+#undef max
 #include <vector>
 #include <QDateTime>
 #include <sstream>

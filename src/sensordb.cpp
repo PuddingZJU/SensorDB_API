@@ -6,23 +6,16 @@ SensorDB::SensorDB()
 }
 
 void SensorDB::OpenDB(const string& ipaddress, const string& dbName, const string& UID, const string& PWD){
-    db=QSqlDatabase::addDatabase("QODBC");
-    db.setDatabaseName(QString("DRIVER={SQL SERVER};"
-                               "SERVER=%1;" //服务器名称
-                               "DATABASE=%2;"//数据库名
-                               "UID=%3;"           //登录名
-                               "PWD=%4;"        //密码
-                               ).arg(string2qstring(ipaddress))
-                       .arg(string2qstring(dbName))
-                       .arg(string2qstring(UID))
-                       .arg(string2qstring(PWD))
-                       );
-   // db.setConnectOptions("SQL_ATTR_ODBC_VERSION=SQL_OV_ODBC3");
+  db=QSqlDatabase::addDatabase("QODBC");
+	db.setDatabaseName( "DRIVER={SQL Server};SERVER="+string2qstring(ipaddress)+";UID="+string2qstring(UID)+";PWD="+string2qstring(PWD)+";DATABASE="+string2qstring(dbName)+" ;");
+	db.setHostName(string2qstring(ipaddress));
+	//db.setDatabaseName(string2qstring(dbName));
+	db.setUserName(string2qstring(UID));
+	db.setPassword(string2qstring(PWD));
+   // db.setConnectOptions("SQL_ATTR_ODBC_VERSION=SQL_OV_ODBC3")
     if (!db.open())
     {
- 
 		qDebug()<<db.lastError().databaseText();
-
     }
 }
 void SensorDB::CloseDB()
