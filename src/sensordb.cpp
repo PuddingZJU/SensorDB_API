@@ -4,7 +4,10 @@ SensorDB::SensorDB()
 {
 
 }
-
+SensorDB::~SensorDB()
+{
+    db.close();
+}
 void SensorDB::OpenDB(const string& ipaddress, const string& dbName, const string& UID, const string& PWD){
   db=QSqlDatabase::addDatabase("QODBC");
 	db.setDatabaseName( "DRIVER={SQL Server};SERVER="+string2qstring(ipaddress)+";UID="+string2qstring(UID)+";PWD="+string2qstring(PWD)+";DATABASE="+string2qstring(dbName)+" ;");
@@ -20,11 +23,7 @@ void SensorDB::OpenDB(const string& ipaddress, const string& dbName, const strin
 }
 void SensorDB::CloseDB()
 {
-    QString dbname;
-    {
-        dbname = QSqlDatabase::database().connectionName();
-    }
-    QSqlDatabase::removeDatabase(dbname);
+    db.close();
 }
 
 bool SensorDB::ExecuteSQL(string sqlcommand){

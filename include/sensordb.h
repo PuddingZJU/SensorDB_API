@@ -16,6 +16,7 @@ private:
     QSqlDatabase db;
 public:
     SensorDB();
+    ~SensorDB();
     void OpenDB(const string& ipaddress, const string& dbName, const string& UID, const string& PWD);
 	bool isOpen();
 	//int get

@@ -116,6 +116,7 @@ int test_main(int argc,char* argv[]){
 	clog<<"\b\b\b\b\b\b\b\b\b\b"<<"Done!          "<<endl;
 	clog<<"Tests Finish"<<endl;
 	db.ExecuteSQL("Truncate Table SensorDataTable");
+	db.CloseDB();
 	return 0;
 }
 
