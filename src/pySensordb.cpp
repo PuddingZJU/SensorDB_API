@@ -57,7 +57,9 @@ extern "C" {
 	//}
 	__declspec(dllexport) bool sensordbIsOpen(SensorDB* self){
 		bool isOpen=self->isOpen();
+#ifdef _DEBUG
 		printf("in sensordbIsOpen: %d\n", isOpen);
+#endif // _DEBUG
 		return isOpen;
 		//return b;
 	}
@@ -101,6 +103,9 @@ extern "C" {
 		return new SensorDataSet(self->SelectDataByActivityId(id));
 	}
 	__declspec(dllexport) SensorDataSet* sensordbSelectDataByActivityName(SensorDB* self, const char* Name){
+#ifdef _DEBUG
+		printf("in sensordbSelectDataByActivityName(), Name: %s\n", Name);
+#endif // _DEBUG
 		return new SensorDataSet(self->SelectDataByActivityName(Name));
 	}
 	__declspec(dllexport) SensorDataSet* sensordbSelectDataByActivityTypeId(SensorDB* self, int id){
@@ -144,17 +149,23 @@ extern "C" {
 
 	__declspec(dllexport) bool compare(SensorDataSet *orign,SensorDataSet *cursds){
 #ifdef _DEBUG
-#endif
 		printf("in compare()~~~~~\n");
+#endif
 		if((*orign).Count() == (*cursds).Count()){
 			for (int i = 0; i < (*orign).Count(); i++)
 			{
 				if((*orign).GetSensorData(i) != (*cursds).GetSensorData(i)){
+#ifdef _DEBUG
+					printf("1------false\n");
+#endif // _DEBUG
 					return false;
 				}
 			}
 		}
 		else{
+#ifdef _DEBUG
+			printf("2------false, (*orign).Count(), (*cursds).Count(): %d, %d\n", (*orign).Count(), (*cursds).Count());
+#endif // _DEBUG
 			return false;
 		}
 		return true;
