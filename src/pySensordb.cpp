@@ -122,6 +122,9 @@ extern "C" {
 	}
 	__declspec(dllexport) bool sensordbAddData(SensorDB* self, SensorDataSet* dataset){
 		bool succ=self->AddData(*dataset);
+#ifdef _DEBUG
+		printf("in sensordbAddData(), succ: %d\n", succ);
+#endif
 		return succ;
 	}
 
