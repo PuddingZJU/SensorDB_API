@@ -1,12 +1,19 @@
 #coding=utf-8
+'''
+数据库接口使用测试：
+方法1：	ctypes 直接调用dll导出函数
+方法2：	使用SensorDB包装类
+'''
+
 import os, sys, ctypes
 from ctypes import *
+from sensordb import SensorDB
 
 encoding='gbk'
 l2=ctypes.cdll.LoadLibrary('SensorDB_API.dll')
 
-def testPyInterf():
-	print("==================testPyInterf===============")
+def testCtypesCall():
+	print("==================testCtypesCall===============")
 	db=l2.sensordbCreate()
 	l2.sensordbOpenDB(db, c_char_p(b'10.12.34.98'), b'CAPGSensorDB_Test', b'capgadmin', b'capg11207')
 	isOpen=l2.sensordbIsOpen(db)
@@ -31,67 +38,6 @@ def testPyInterf():
 	assert l2.sensordbExecuteSQL(db, b"Truncate Table SensorDataTable")
 	l2.sensordbCloseDB(db)
 
-# =============================wrapper class
-from ctypes import *
-class SensorDB:
-	def __init__(self, libPath=None):
-		self.__lib=cdll.LoadLibrary('./SensorDB_API.dll' if libPath is None else libPath)
-		self.__db=self.__lib.sensordbCreate()
-	
-	def openDB(self, ipAddress, dbName, uid, pwd):
-		return bool(self.__lib.sensordbOpenDB(self.__db, ipAddress, dbName, uid, pwd))
-	
-	def isOpen(self):
-		return bool(self.__lib.sensordbIsOpen(self.__db))
-		
-	def closeDB(self):
-		return self.__lib.sensordbCloseDB(self.__db)
-	
-	def executeSQL(self, sqlStr):
-		return self.__lib.sensordbExecuteSQL(self.__db, sqlStr)
-	
-	def selectDataByDataTypeId(self, id):
-		return self.__lib.sensordbSelectDataByDataTypeId(self.__db, id)
-	
-	def selectDataByDataTypeName(self, name):
-		return self.__lib.sensordbSelectDataByDataTypeName(self.__db, name)
-	
-	def selectDataByOperatorId(self, id):
-		return self.__lib.sensordbSelectDataByOperatorId(self.__db, id)
-		
-	def selectDataByOperatorName(self, name):
-		return self.__lib.sensordbSelectDataByOperatorName(self.__db, name)
-		
-	def selectDataByDeviceId(self, id):
-		return self.__lib.sensordbSelectDataByDeviceId(self.__db, id)
-		
-	def selectDataByDeviceName(self, name):
-		return self.__lib.sensordbSelectDataByDeviceName(self.__db, name)
-		
-	def selectDataByActivityId(self, id):
-		return self.__lib.sensordbSelectDataByActivityId(self.__db, id)
-		
-	def selectDataByActivityName(self, name):
-		return self.__lib.sensordbSelectDataByActivityName(self.__db, name)
-		
-	def selectDataByActivityTypeId(self, id):
-		return self.__lib.sensordbSelectDataByActivityTypeId(self.__db, id)
-		
-	def selectDataByActivityTypeName(self, name):
-		return self.__lib.sensordbSelectDataByActivityTypeName(self.__db, name)
-		
-	def selectDataByPositionId(self, id):
-		return self.__lib.sensordbSelectDataByPositionId(self.__db, id)
-		
-	def selectDataByPositionName(self, name):
-		return self.__lib.sensordbSelectDataByPositionName(self.__db, name)
-	
-	def selectDataByIDSection(self, start, end):
-		return self.__lib.sensordbSelectDataByIDSection(self.__db, start, end)
-		
-	def addData(self, dataset):
-		return self.__lib.sensordbAddData(self.__db, dataset)
-		
 def testWrapperClass():
 	print("==================testWrapperClass===============")
 	db=SensorDB()
@@ -118,5 +64,5 @@ def testWrapperClass():
 	db.closeDB()
 
 if __name__=='__main__':
-	testPyInterf()
+	testCtypesCall()
 	testWrapperClass()
