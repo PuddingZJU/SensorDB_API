@@ -2,6 +2,7 @@
 ## added by zhangxaochen
 #################
 proj.win32/
+*.dll
 
 
 #################
